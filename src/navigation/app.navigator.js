@@ -24,11 +24,11 @@ export const AppNavigator = () => {
                     tabBarIcon: ({ color, size }) => {
                         let iconName;
                         switch (route.name) {
-                            case 'Home':
+                            case t("home"):
                                 iconName = 'md-home'
                                 break;
 
-                            case 'Settings':
+                            case t("settings"):
                                 iconName = 'md-settings-sharp'
                                 break;
 
@@ -50,5 +50,3 @@ export const AppNavigator = () => {
         </NavigationContainer>
     )
 }
-
-

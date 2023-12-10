@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import {
-    View,
     Text,
     StyleSheet,
     Animated,
-    PanResponder,
     TouchableWithoutFeedback,
-    ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 

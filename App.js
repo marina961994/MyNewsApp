@@ -1,18 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import { AppNavigator } from './src/navigation/app.navigator';
 
-import { ThemeProvider } from '@react-navigation/native';
-
+// import { ThemeContextProvider } from './src/services/Theme.context';
 import { LanguageContextProvider } from './src/services/Language.context';
+import { SearchContextProvider } from './src/services/Search.context';
 
 export default function App() {
   return (
     <>
-      <ThemeProvider >
-        <LanguageContextProvider>
+      <LanguageContextProvider>
+        <SearchContextProvider>
           <AppNavigator />
-        </LanguageContextProvider>
-      </ThemeProvider>
+        </SearchContextProvider>
+      </LanguageContextProvider>
+
+      {/* <ThemeContextProvider>
+      </ThemeContextProvider> */}
       <StatusBar style="auto" />
     </>
   );

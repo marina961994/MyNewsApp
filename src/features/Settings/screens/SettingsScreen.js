@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
 
 import styled from "styled-components/native";
 import { Card } from 'react-native-paper';
 
 import Switch from '../components/Switch.component';
-import { SafeAreaComponent } from '../../../utils/safe-area.component'
+import { SafeAreaComponent } from '../../../utils/safe-area.component';
+
+// import { ThemeContext } from '../../../services/Theme.context';
 import { LanguageContext } from '../../../services/Language.context';
 
 import '../../../locales/index';
 import { useTranslation } from 'react-i18next';
+
+import { Colors } from '../../../theme/index';
 
 
 const TitleContainer = styled.View`
@@ -43,6 +47,7 @@ const ItemText = styled.Text`
 
 export const SettingsScreen = () => {
     const { isEnglish, changeLanguage } = useContext(LanguageContext);
+    // const { theme, changeTheme } = useContext(ThemeContext);
 
     const [isLangEnabled, setIsLangEnabled] = useState(isEnglish);
     const [isModeEnabled, setIsModeEnabled] = useState(true);
@@ -65,6 +70,16 @@ export const SettingsScreen = () => {
         }
 
     }, [isLangEnabled]);
+
+
+    // useEffect(() => {
+    //     if (isModeEnabled) {
+    //         changeTheme('light');
+    //     } else {
+    //         changeTheme('dark');
+    //     }
+
+    // }, [isModeEnabled]);
 
     return (
         <SafeAreaComponent>
