@@ -2,17 +2,17 @@ import React, { useState, useEffect, useContext } from 'react';
 
 import styled from "styled-components/native";
 import { Card } from 'react-native-paper';
+import { useTheme } from '@react-navigation/native';
 
 import Switch from '../components/Switch.component';
 import { SafeAreaComponent } from '../../../utils/safe-area.component';
 
-// import { ThemeContext } from '../../../services/Theme.context';
 import { LanguageContext } from '../../../services/Language.context';
+
+import { AppContext } from '../../../services/AppContext';
 
 import '../../../locales/index';
 import { useTranslation } from 'react-i18next';
-
-import { Colors } from '../../../theme/index';
 
 
 const TitleContainer = styled.View`
@@ -27,16 +27,13 @@ const ScreenTitle = styled.Text`
 `;
 
 const CardView = styled(Card)`
-  margin-top : 30px;
   padding : 16px;
-  margin-top : 25px;
-  margin-left : 15px;
-  margin-right : 15px;
+  margin-top : 30px;
+  margin-left : 10px;
+  margin-right : 10px;
 `;
 
-const ItemContainer = styled.View`
-  flex-direction : row;
-`;
+const ItemContainer = styled.View`flex-direction : row;`;
 
 const ItemText = styled.Text`
   padding : 10px;
@@ -46,65 +43,55 @@ const ItemText = styled.Text`
 `;
 
 export const SettingsScreen = () => {
-    const { isEnglish, changeLanguage } = useContext(LanguageContext);
-    // const { theme, changeTheme } = useContext(ThemeContext);
-
-    const [isLangEnabled, setIsLangEnabled] = useState(isEnglish);
-    const [isModeEnabled, setIsModeEnabled] = useState(true);
-
     const { t } = useTranslation();
+    const { isEnglish, changeLanguage } = useContext(LanguageContext);
+    const [isLangEnabled, setIsLangEnabled] = useState(isEnglish);
+
+    const { colors } = useTheme();
+    const { isDarkTheme, setIsDarkTheme } = useContext(AppContext);
 
     const toggleLanguage = () => {
         setIsLangEnabled((previousState) => !previousState);
     }
 
-    const toggleMode = () => {
-        setIsModeEnabled((previousState) => !previousState);
+    const toggleTheme = () => {
+        setIsDarkTheme((previousState) => !previousState)
     }
 
     useEffect(() => {
-        if (isLangEnabled) {
-            changeLanguage('en');
-        } else {
-            changeLanguage('fr');
-        }
-
+        const language = isLangEnabled ? 'en' : 'fr';
+        changeLanguage(language)
     }, [isLangEnabled]);
 
-
-    // useEffect(() => {
-    //     if (isModeEnabled) {
-    //         changeTheme('light');
-    //     } else {
-    //         changeTheme('dark');
-    //     }
-
-    // }, [isModeEnabled]);
-
     return (
-        <SafeAreaComponent>
+        <SafeAreaComponent >
             <TitleContainer>
-                <ScreenTitle>{t('settings')}</ScreenTitle>
+                <ScreenTitle style={{ color: colors.text }}>
+                    {t('settings')}
+                </ScreenTitle>
             </TitleContainer>
 
-            <CardView>
+            <CardView style={{ backgroundColor: colors.cardBg }}>
                 <ItemContainer>
-                    <ItemText>{t('changeAppLanguage')}</ItemText>
+                    <ItemText style={{ color: colors.text }}>
+                        {t('changeAppLanguage')}
+                    </ItemText>
                     <Switch
                         value={isLangEnabled}
                         onValueChange={toggleLanguage}
                         renderActiveText={true}
-                        renderInActiveText={true}
-                    />
+                        renderInActiveText={true} />
                 </ItemContainer>
             </CardView>
 
-            <CardView>
+            <CardView style={{ backgroundColor: colors.cardBg }}>
                 <ItemContainer>
-                    <ItemText>{t('changeAppMode')}</ItemText>
+                    <ItemText style={{ color: colors.text }}>
+                        {t('changeAppMode')}
+                    </ItemText>
                     <Switch
-                        value={isModeEnabled}
-                        onValueChange={toggleMode}
+                        value={isDarkTheme}
+                        onValueChange={toggleTheme}
                         renderActiveText={true}
                         renderInActiveText={true}
                         activeText={t('light')}

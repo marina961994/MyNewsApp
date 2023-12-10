@@ -1,9 +1,8 @@
 import React from 'react'
 
-import { Text } from 'react-native'
 import styled from "styled-components/native";
 import { Card } from 'react-native-paper';
-
+import { useTheme } from '@react-navigation/native';
 
 import { SafeAreaComponent } from '../../../utils/safe-area.component'
 
@@ -34,17 +33,22 @@ const ArticleDescription = styled.Text`
 
 
 export const NewsDetailsScreen = ({ route }) => {
-    const { article } = route.params;
+  const { article } = route.params;
+  const { colors } = useTheme();
 
-    return (
-        <SafeAreaComponent>
-            <ArticleCard elevation={5}>
-                <ArticleCardCover source={{ uri: article.imageUrl }} />
-            </ArticleCard>
+  return (
+    <SafeAreaComponent>
+      <ArticleCard elevation={5}>
+        <ArticleCardCover source={{ uri: article.imageUrl }} />
+      </ArticleCard>
 
-            <ArticleTitle>{article.title}</ArticleTitle>
-            <ArticleDescription>{article.description}</ArticleDescription>
+      <ArticleTitle style={{ color: colors.text }}>
+        {article.title}
+      </ArticleTitle>
+      <ArticleDescription style={{ color: colors.text }}>
+        {article.description}
+      </ArticleDescription>
 
-        </SafeAreaComponent>
-    )
+    </SafeAreaComponent>
+  )
 }

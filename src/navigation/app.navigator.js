@@ -1,7 +1,8 @@
 import React from 'react'
 
-import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useTheme } from '@react-navigation/native';
+
 import { Ionicons } from '@expo/vector-icons';
 
 import { NewsNavigator } from './news.navigator'
@@ -15,38 +16,36 @@ const Tabs = createBottomTabNavigator();
 
 export const AppNavigator = () => {
     const { t } = useTranslation();
+    const { colors } = useTheme();
 
     return (
-        <NavigationContainer>
-            <Tabs.Navigator
-                screenOptions={({ route }) => ({
-                    headerShown: false,
-                    tabBarIcon: ({ color, size }) => {
-                        let iconName;
-                        switch (route.name) {
-                            case t("home"):
-                                iconName = 'md-home'
-                                break;
+        <Tabs.Navigator
+            screenOptions={({ route }) => ({
+                headerShown: false,
+                tabBarIcon: ({ color, size }) => {
+                    let iconName;
+                    switch (route.name) {
+                        case t("home"):
+                            iconName = 'md-home'
+                            break;
 
-                            case t("settings"):
-                                iconName = 'md-settings-sharp'
-                                break;
+                        case t("settings"):
+                            iconName = 'md-settings-sharp'
+                            break;
 
-                            default:
-                                break;
-                        }
+                        default:
+                            break;
+                    }
 
-                        return <Ionicons name={iconName} size={size} color={color} />;
-                    },
-                    tabBarActiveTintColor: 'purple',
-                    tabBarInactiveTintColor: 'gray',
-                })}>
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                },
+                tabBarActiveTintColor: 'purple',
+                tabBarInactiveTintColor: colors.tabTitle,
+            })}>
 
-                <Tabs.Screen name={t("home")} component={NewsNavigator} />
-                <Tabs.Screen name={t("settings")} component={SettingsScreen} />
+            <Tabs.Screen name={t("home")} component={NewsNavigator} />
+            <Tabs.Screen name={t("settings")} component={SettingsScreen} />
 
-            </Tabs.Navigator>
-
-        </NavigationContainer>
+        </Tabs.Navigator>
     )
 }
