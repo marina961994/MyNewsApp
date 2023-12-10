@@ -1,6 +1,9 @@
 {
-    "home": "Home",
+    "home": "Maison",
     "settings": "paramètres",
-    "changeMobileLanguage": "Changer la langue de l'application",
-    "changeMobileMode": "Changer le mode de l'application"
+    "newsDetails": "Détails de l'actualité",
+    "changeAppLanguage": "Changer la langue de l'application",
+    "changeAppMode": "Changer le mode de l'application",
+    "light": "léger",
+    "dark": "Foncé"
 }

@@ -5,12 +5,17 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import { NewsNavigator } from './news.navigator'
-import { SettingsScreen } from '../../features/Settings/screens/SettingsScreen'
+import { SettingsScreen } from '../features/Settings/screens/SettingsScreen'
+
+import '../locales/index';
+import { useTranslation } from 'react-i18next';
 
 
 const Tabs = createBottomTabNavigator();
 
 export const AppNavigator = () => {
+    const { t } = useTranslation();
+
     return (
         <NavigationContainer>
             <Tabs.Navigator
@@ -37,8 +42,8 @@ export const AppNavigator = () => {
                     tabBarInactiveTintColor: 'gray',
                 })}>
 
-                <Tabs.Screen name='Home' component={NewsNavigator} />
-                <Tabs.Screen name='Settings' component={SettingsScreen} />
+                <Tabs.Screen name={t("home")} component={NewsNavigator} />
+                <Tabs.Screen name={t("settings")} component={SettingsScreen} />
 
             </Tabs.Navigator>
 

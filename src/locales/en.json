@@ -1,6 +1,9 @@
 {
     "home": "Home",
     "settings": "Settings",
-    "changeMobileLanguage": "Change App Language",
-    "changeMobileMode": "Change App Mode"
+    "newsDetails": "News Details",
+    "changeAppLanguage": "Change App Language",
+    "changeAppMode": "Change App Mode",
+    "light": "Light",
+    "dark": "Dark"
 }

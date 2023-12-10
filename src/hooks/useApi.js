@@ -12,7 +12,7 @@ export const useApi = () => {
         setArticles([]);
 
         try {
-            const articlesUrl = 'https://newsapi.org/v2/everything?q=Apple&from=2023-12-01&sortBy=popularity&apiKey=4955ed0b3ee14c15a349dd122ffd559e';
+            const articlesUrl = 'https://newsapi.org/v2/everything?q=Apple&from=2023-12-07&sortBy=popularity&apiKey=4955ed0b3ee14c15a349dd122ffd559e';
             const response = await axios.get(articlesUrl);
             const articlesData = response.data.articles.map((article) => {
                 return {

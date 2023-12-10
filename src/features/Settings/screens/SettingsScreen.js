@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import styled from "styled-components/native";
 import { Card } from 'react-native-paper';
 
 import Switch from '../components/Switch.component';
 import { SafeAreaComponent } from '../../../utils/safe-area.component'
+import { LanguageContext } from '../../../services/Language.context';
+
+import '../../../locales/index';
+import { useTranslation } from 'react-i18next';
 
 
 const TitleContainer = styled.View`
@@ -34,16 +38,16 @@ const ItemText = styled.Text`
   padding : 10px;
   align-items : center;
   margin-right : 45px;
-  font-size : 18px;
-`;
-
-const Space = styled.View`
-  margin-top : 30px;
+  font-size : 15px;
 `;
 
 export const SettingsScreen = () => {
-    const [isLangEnabled, setIsLangEnabled] = useState(false);
-    const [isModeEnabled, setIsModeEnabled] = useState(false);
+    const { isEnglish, changeLanguage } = useContext(LanguageContext);
+
+    const [isLangEnabled, setIsLangEnabled] = useState(isEnglish);
+    const [isModeEnabled, setIsModeEnabled] = useState(true);
+
+    const { t } = useTranslation();
 
     const toggleLanguage = () => {
         setIsLangEnabled((previousState) => !previousState);
@@ -53,33 +57,43 @@ export const SettingsScreen = () => {
         setIsModeEnabled((previousState) => !previousState);
     }
 
+    useEffect(() => {
+        if (isLangEnabled) {
+            changeLanguage('en');
+        } else {
+            changeLanguage('fr');
+        }
+
+    }, [isLangEnabled]);
+
     return (
         <SafeAreaComponent>
             <TitleContainer>
-                <ScreenTitle>Settings</ScreenTitle>
+                <ScreenTitle>{t('settings')}</ScreenTitle>
             </TitleContainer>
 
             <CardView>
                 <ItemContainer>
-                    <ItemText>Change App Language</ItemText>
+                    <ItemText>{t('changeAppLanguage')}</ItemText>
                     <Switch
                         value={isLangEnabled}
                         onValueChange={toggleLanguage}
                         renderActiveText={true}
-                        renderInActiveText={true} />
+                        renderInActiveText={true}
+                    />
                 </ItemContainer>
             </CardView>
 
             <CardView>
                 <ItemContainer>
-                    <ItemText>Change App Mode</ItemText>
+                    <ItemText>{t('changeAppMode')}</ItemText>
                     <Switch
                         value={isModeEnabled}
                         onValueChange={toggleMode}
                         renderActiveText={true}
                         renderInActiveText={true}
-                        activeText='Light'
-                        inActiveText='Dark' />
+                        activeText={t('light')}
+                        inActiveText={t('dark')} />
                 </ItemContainer>
             </CardView>
 
